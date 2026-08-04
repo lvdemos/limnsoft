@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LIMN — Web Design & Development</title>
-  <meta name="description" content="LIMN — Premium web design and development. Built to convert, designed to last."/>
+  <title>LIMN | AI Receptionist & Web Design</title>
+  <meta name="description" content="An AI receptionist built and managed by LIMN, delivered under your brand, paired with website design to match. It answers every call, captures every lead, and works around the clock."/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
@@ -410,70 +410,111 @@
     }
 
     /* ─── PROCESS ─── */
-    #process { border-bottom: 1px solid var(--border); }
+    #process { border-bottom: 1px solid var(--border); padding: 4.5rem 5vw; }
 
-    .process-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 5rem;
-      align-items: end;
-    }
-
-    @media (max-width: 680px) {
-      .process-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
-    }
+    .process-header { margin-bottom: 2.5rem; max-width: 560px; }
 
     .process-header h2 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(1.7rem, 3.6vw, 2.4rem);
       font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
       font-weight: 400;
       letter-spacing: 0.01em;
-      line-height: 1;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
     }
 
     .process-header p {
       color: var(--gray);
-      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-      line-height: 1.85;
+      font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+      line-height: 1.7;
     }
 
     .process-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: var(--border);
     }
 
-    @media (max-width: 600px) { .process-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 780px) { .process-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
 
-    .process-card {
-      background: var(--black);
-      padding: 3rem 2.5rem;
-    }
-
-    @media (max-width: 480px) { .process-card { padding: 2rem 1.5rem; } }
+    .process-card { background: var(--black); padding: 1.6rem 1.5rem; }
 
     .process-card-num {
       font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--gray);
       letter-spacing: 0.1em;
-      margin-bottom: 2rem;
+      margin-bottom: 0.9rem;
     }
 
     .process-card-title {
-      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-size: clamp(0.98rem, 1.8vw, 1.1rem);
       font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
       font-weight: 400;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.4rem;
       letter-spacing: 0.02em;
     }
 
     .process-card-text {
       color: var(--gray);
-      font-size: clamp(0.9rem, 1.6vw, 0.98rem);
-      line-height: 1.85;
+      font-size: 0.83rem;
+      line-height: 1.65;
+    }
+
+    /* ─── FRONT DESK ─── */
+    #front-desk { border-bottom: 1px solid var(--border); padding: 4.5rem 5vw; }
+
+    .fd-header { margin-bottom: 2.5rem; max-width: 560px; }
+
+    .fd-header h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .fd-header p {
+      color: var(--gray);
+      font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+      line-height: 1.7;
+    }
+
+    .fd-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    @media (max-width: 780px) { .fd-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fd-grid { grid-template-columns: 1fr; } }
+
+    .fd-item { background: var(--black); padding: 1.6rem 1.5rem; }
+
+    .fd-item-num {
+      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.9rem;
+    }
+
+    .fd-item-title {
+      font-size: clamp(0.98rem, 1.8vw, 1.1rem);
+      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .fd-item-text {
+      color: var(--gray);
+      font-size: 0.83rem;
+      line-height: 1.65;
     }
 
     /* ─── CONTACT ─── */
@@ -651,11 +692,10 @@
 
     .work-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
-    @media (max-width: 900px) { .work-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 700px) { .work-grid { grid-template-columns: 1fr; } }
 
     .work-card {
@@ -804,13 +844,13 @@
 
   <!-- HERO -->
   <section id="home">
-    <div class="hero-eyebrow reveal">Web Design & AI Solutions</div>
+    <div class="hero-eyebrow reveal">AI Receptionist & Web Design</div>
     <h1 class="hero-title reveal">
-      Sites that work<br/>as good as they <em>look.</em>
+      Every call answered.<br/>Every lead <em>captured.</em>
     </h1>
     <div class="hero-bottom reveal">
       <p class="hero-sub">
-        Custom web design, development, and AI receptionists for businesses that want to stand out. No templates. No shortcuts.
+        An AI receptionist that answers, qualifies, and books every lead the moment they call, delivered under your brand on a website built to match it.
       </p>
       <a class="hero-cta" href="#contact">Start a project</a>
     </div>
@@ -819,8 +859,8 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item">Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> AI Receptionist <span>·</span> Custom Builds <span>·</span> Performance <span>·</span></div>
-      <div class="marquee-item">Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> AI Receptionist <span>·</span> Custom Builds <span>·</span> Performance <span>·</span></div>
+      <div class="marquee-item">AI Receptionist <span>·</span> Lead Capture <span>·</span> Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> Custom Builds <span>·</span></div>
+      <div class="marquee-item">AI Receptionist <span>·</span> Lead Capture <span>·</span> Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> Custom Builds <span>·</span></div>
     </div>
   </div>
 
@@ -828,38 +868,38 @@
   <section id="services">
     <div class="section-eyebrow">Services</div>
     <div class="services-intro reveal">
-      <h2>Everything you need,<br/>nothing you don't.</h2>
-      <p>From a single landing page to a full custom build — and now AI receptionists that answer calls 24/7. Each project is scoped and priced based on what you actually need.</p>
+      <h2>AI Receptionist,<br/>website design to match.</h2>
+      <p>Our AI receptionist is built for businesses that cannot afford to miss a lead. It answers every call, responds to every inquiry, and books appointments day and night, all under your brand. Paired with a website built to support it, it turns your online presence into a system that captures business while you focus on running it.</p>
     </div>
     <div class="services-list">
 
       <div class="service-row reveal">
-        <div class="service-name">Web Design</div>
-        <div class="service-desc">Custom layouts built around your brand. Thoughtful, clean, and designed to make a real impression — not just look good in a screenshot.</div>
+        <div class="service-name">AI Receptionist</div>
+        <div class="service-desc">An enterprise grade AI receptionist that answers calls, captures leads, and books appointments day and night. Delivered under your brand, so it feels like your own team, not an outside vendor.</div>
         <div class="service-num">01</div>
       </div>
 
       <div class="service-row reveal">
-        <div class="service-name">Web Development</div>
-        <div class="service-desc">Fast, clean code that holds up. Every site is responsive, optimized, and built to last — no bloated builders or mystery plugins.</div>
+        <div class="service-name">Website Design</div>
+        <div class="service-desc">The interface for your AI receptionist. A custom site built around your brand that gives clients a place to book, ask, and connect, with it working behind the scenes around the clock.</div>
         <div class="service-num">02</div>
       </div>
 
       <div class="service-row reveal">
-        <div class="service-name">Landing Pages</div>
-        <div class="service-desc">Focused, high-converting pages for launches, campaigns, and lead gen. Built to move people to act.</div>
+        <div class="service-name">Web Development</div>
+        <div class="service-desc">Fast, reliable code built to support real business activity: bookings, inquiries, and everyday traffic, without slowdowns or plugin bloat.</div>
         <div class="service-num">03</div>
       </div>
 
       <div class="service-row reveal">
-        <div class="service-name">Maintenance & Support</div>
-        <div class="service-desc">Ongoing updates, fixes, and improvements so your site stays current, secure, and working exactly as it should.</div>
+        <div class="service-name">Landing Pages</div>
+        <div class="service-desc">Focused pages for campaigns and launches, built to turn visitors into conversations your AI receptionist can pick up and convert into booked business.</div>
         <div class="service-num">04</div>
       </div>
 
       <div class="service-row reveal">
-        <div class="service-name">AI Receptionist</div>
-        <div class="service-desc">A phone agent that answers calls 24/7, books appointments, handles inquiries, and sends follow-up texts — for a fraction of what a human receptionist costs. Powered by AI, set up in days.</div>
+        <div class="service-name">Maintenance & Support</div>
+        <div class="service-desc">Ongoing updates and monitoring so your site and your AI receptionist keep working exactly as they should.</div>
         <div class="service-num">05</div>
       </div>
 
@@ -916,21 +956,6 @@
         </div>
       </a>
 
-      <a class="work-card reveal" href="#contact" target="_blank" rel="noopener">
-        <div class="work-card-preview">
-          <div class="work-card-placeholder">
-            <div class="work-card-placeholder-label">Coming Soon</div>
-          </div>
-        </div>
-        <div class="work-card-body">
-          <div class="work-card-info">
-            <div class="work-card-tag">Restaurant · Hospitality</div>
-            <div class="work-card-title">Demo — Restaurant</div>
-          </div>
-          <div class="work-card-arrow">↗</div>
-        </div>
-      </a>
-
     </div>
   </section>
 
@@ -939,14 +964,14 @@
     <div class="section-eyebrow">Process</div>
     <div class="process-header">
       <h2 class="reveal">Simple process,<br/>serious results.</h2>
-      <p class="reveal">No surprises. You know what's happening at every stage — from first conversation to launch day.</p>
+      <p class="reveal">No surprises. You know what's happening at every stage, from first conversation to launch day.</p>
     </div>
     <div class="process-grid">
 
       <div class="process-card reveal">
         <div class="process-card-num">01</div>
         <div class="process-card-title">Discovery</div>
-        <p class="process-card-text">We talk through your goals, audience, and vision. No assumptions — just the right questions upfront so the work actually hits.</p>
+        <p class="process-card-text">We talk through your goals, audience, and vision. No assumptions, just the right questions upfront so the work actually hits.</p>
       </div>
 
       <div class="process-card reveal">
@@ -958,13 +983,49 @@
       <div class="process-card reveal">
         <div class="process-card-num">03</div>
         <div class="process-card-title">Build</div>
-        <p class="process-card-text">Clean, performant code — responsive on every device, optimized for speed, built to scale.</p>
+        <p class="process-card-text">Clean, performant code. Responsive on every device, optimized for speed, and built to scale.</p>
       </div>
 
       <div class="process-card reveal">
         <div class="process-card-num">04</div>
         <div class="process-card-title">Launch</div>
-        <p class="process-card-text">Full deployment and handoff. Your site goes live tested and ready — and I'm available if anything comes up.</p>
+        <p class="process-card-text">Full deployment and handoff. Your site goes live tested and ready, and support is available if anything comes up.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FRONT DESK -->
+  <section id="front-desk">
+    <div class="section-eyebrow">Front Desk</div>
+    <div class="fd-header reveal">
+      <h2>Live in four steps.</h2>
+      <p>Getting your AI receptionist live is its own short process, built around how your business already runs.</p>
+    </div>
+    <div class="fd-grid">
+
+      <div class="fd-item reveal">
+        <div class="fd-item-num">01</div>
+        <div class="fd-item-title">Integration Strategy</div>
+        <p class="fd-item-text">We map your existing lead workflows.</p>
+      </div>
+
+      <div class="fd-item reveal">
+        <div class="fd-item-num">02</div>
+        <div class="fd-item-title">Knowledge Hub</div>
+        <p class="fd-item-text">We program your unique business rules and hours.</p>
+      </div>
+
+      <div class="fd-item reveal">
+        <div class="fd-item-num">03</div>
+        <div class="fd-item-title">Live Simulation</div>
+        <p class="fd-item-text">We test the receptionist against your toughest scenarios.</p>
+      </div>
+
+      <div class="fd-item reveal">
+        <div class="fd-item-num">04</div>
+        <div class="fd-item-title">Go Live</div>
+        <p class="fd-item-text">Seamless activation with secure call forwarding.</p>
       </div>
 
     </div>
@@ -974,7 +1035,7 @@
   <section id="contact">
     <div class="section-eyebrow">Let's build</div>
     <h2 class="contact-title reveal">Have a project in mind?</h2>
-    <p class="contact-sub reveal">Every project starts with a conversation. Reach out and we'll talk through what you need — pricing is figured out together.</p>
+    <p class="contact-sub reveal">Every project starts with a conversation. Reach out and we'll talk through what you need. Pricing is figured out together.</p>
     <a class="contact-email reveal" href="mailto:liamswebstudio@gmail.com">liamswebstudio@gmail.com</a>
   </section>
 
@@ -1042,7 +1103,7 @@
   <p>Payment terms are outlined in your project proposal. A deposit is required before work begins. Final delivery requires full payment. All fees are non-refundable once work has started unless agreed otherwise in writing.</p>
 
   <h2>Intellectual Property</h2>
-  <p>Upon full payment, you own the final deliverables. LIMN may display the work in our portfolio unless you request otherwise in writing. Third-party assets are subject to their own licenses — you're responsible for anything you supply.</p>
+  <p>Upon full payment, you own the final deliverables. LIMN may display the work in our portfolio unless you request otherwise in writing. Third-party assets are subject to their own licenses, and you're responsible for anything you supply.</p>
 
   <h2>Client Responsibilities</h2>
   <ul>
