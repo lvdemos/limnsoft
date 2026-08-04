@@ -10,6 +10,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet"/>
   <style>
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/static/Syne-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/static/Syne-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/static/Syne-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/static/Syne-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/static/Syne-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -105,9 +141,9 @@
     }
 
     .nav-logo {
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
+      font-family: 'Syne', sans-serif;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 800;
       letter-spacing: 0.04em;
       color: var(--white);
       text-decoration: none;
@@ -204,13 +240,13 @@
     }
 
     .hero-eyebrow {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
+      color: var(--white);
+      margin-bottom: 2rem;
+      font-family: 'Syne', sans-serif;
     }
 
     .hero-title {
@@ -493,8 +529,9 @@
     }
 
     .footer-logo {
+      font-family: 'Syne', sans-serif;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 800;
       letter-spacing: 0.06em;
       color: var(--gray);
     }
