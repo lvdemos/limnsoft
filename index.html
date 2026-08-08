@@ -992,68 +992,6 @@
       letter-spacing: 0.06em;
     }
 
-    /* ─── LEGAL ─── */
-    .legal-page {
-      display: none;
-      min-height: 100vh;
-      padding: 9rem 5vw 6rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .legal-page.active { display: block; }
-    #home-content.hidden { display: none; }
-
-    .legal-title {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      line-height: 1;
-      margin-bottom: 0.8rem;
-    }
-
-    .legal-date {
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-      font-size: 0.68rem;
-      color: var(--gray);
-      letter-spacing: 0.08em;
-      margin-bottom: 3.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .legal-page h2 {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 2.5rem 0 0.8rem;
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-    }
-
-    .legal-page p, .legal-page li {
-      color: var(--gray);
-      font-size: clamp(0.95rem, 2vw, 1rem);
-      line-height: 1.9;
-      margin-bottom: 0.8rem;
-    }
-
-    .legal-page ul { padding-left: 1.4rem; margin-bottom: 1rem; }
-
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem;
-      color: var(--gray);
-      background: none; border: none;
-      margin-bottom: 2.5rem;
-      transition: color 0.2s;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-    }
-    .back-btn:hover { color: var(--white); }
-
     /* ─── WORK ─── */
     #work {
       padding: 8rem 6vw;
@@ -1219,12 +1157,12 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showHome()">LIMN</a>
+  <a class="nav-logo" href="#">LIMN</a>
   <ul class="nav-links">
-    <li><a href="#services" onclick="showHome()">Services</a></li>
-    <li><a href="#work" onclick="showHome()">Work</a></li>
-    <li><a href="#process" onclick="showHome()">Process</a></li>
-    <li><a href="#contact" onclick="showHome()" class="nav-cta-link">Contact</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta-link">Contact</a></li>
   </ul>
 </nav>
 
@@ -1500,96 +1438,12 @@
   <footer>
     <div class="footer-logo">LIMN</div>
     <div class="footer-links">
-      <a href="#" onclick="showPage('privacy'); return false;">Privacy Policy</a>
-      <a href="#" onclick="showPage('terms'); return false;">Terms & Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
     </div>
     <div class="footer-copy">© 2025 LIMN</div>
   </footer>
 
-</div>
-
-
-<!-- PRIVACY -->
-<div id="privacy-page" class="legal-page">
-  <button class="back-btn" onclick="showHome()">← Back</button>
-  <div class="legal-title">Privacy Policy</div>
-  <div class="legal-date">Last updated: August 2026 · limnsoft.com</div>
-
-  <h2>Overview</h2>
-  <p>LIMN ("we", "us", "our") operates limnsoft.com. This policy explains how we collect, use, and protect your information when you visit our site or reach out about our services.</p>
-
-  <h2>What We Collect</h2>
-  <p>We may collect your name and email when you contact us, project details shared in correspondence, and basic usage data (browser type, pages visited) via analytics tools. When we make outbound sales calls, we also collect business contact information (business name, phone number, and related details) and, where a call is recorded, the recording and its transcript. We don't collect financial information or anything beyond what's needed to communicate and deliver our services.</p>
-
-  <h2>How We Use It</h2>
-  <p>Only to respond to inquiries, deliver services, and understand how visitors use our site. We do not sell or rent your data to anyone.</p>
-
-  <h2>Outbound Calls & SMS</h2>
-  <p>We make outbound sales calls to businesses using an AI voice agent. Calls may be recorded and transcribed for quality assurance and lead qualification. If you give verbal consent during a call, we may send a follow-up SMS containing a booking link. You can opt out of calls or texts at any time by replying STOP to a text or verbally requesting removal during a call, and we honor these requests immediately.</p>
-
-  <h2>Cookies</h2>
-  <p>We may use cookies to improve your experience. You can disable them in your browser settings.</p>
-
-  <h2>Third-Party Links</h2>
-  <p>We're not responsible for the privacy practices of any external sites we link to.</p>
-
-  <h2>Data Retention</h2>
-  <p>We keep your data only as long as needed. Project correspondence is deleted once it's no longer relevant. Call and lead data (business name, contact info, call summary) is retained only as long as needed for follow-up and is not sold or shared with third parties.</p>
-
-  <h2>Your Rights</h2>
-  <p>You can request access to, correction of, or deletion of your data anytime by emailing <a href="mailto:contact@limnsoft.com?subject=Data%20Request" style="color:var(--accent)">contact@limnsoft.com</a>.</p>
-
-  <h2>Changes</h2>
-  <p>This policy may be updated occasionally. Continued use of the site means you accept any changes.</p>
-
-  <h2>Contact</h2>
-  <p><a href="mailto:contact@limnsoft.com?subject=Privacy%20Policy%20Inquiry" style="color:var(--accent)">contact@limnsoft.com</a></p>
-</div>
-
-
-<!-- TERMS -->
-<div id="terms-page" class="legal-page">
-  <button class="back-btn" onclick="showHome()">← Back</button>
-  <div class="legal-title">Terms & Conditions</div>
-  <div class="legal-date">Last updated: March 2025 · limnsoft.com</div>
-
-  <h2>Agreement</h2>
-  <p>By using limnsoft.com or hiring LIMN for services, you agree to these terms.</p>
-
-  <h2>Services</h2>
-  <p>LIMN provides web design and development services. Scope, timeline, and deliverables are defined in a proposal before work begins. Pricing is determined per project following an initial conversation.</p>
-
-  <h2>Payment</h2>
-  <p>Payment terms are outlined in your project proposal. A deposit is required before work begins. Final delivery requires full payment. All fees are non-refundable once work has started unless agreed otherwise in writing.</p>
-
-  <h2>Intellectual Property</h2>
-  <p>Upon full payment, you own the final deliverables. LIMN may display the work in our portfolio unless you request otherwise in writing. Third-party assets are subject to their own licenses, and you're responsible for anything you supply.</p>
-
-  <h2>Client Responsibilities</h2>
-  <ul>
-    <li>Provide timely feedback throughout the project</li>
-    <li>Supply content, assets, and credentials when needed</li>
-    <li>Review and approve deliverables within agreed timeframes</li>
-  </ul>
-  <p>Client-caused delays may affect timeline and cost.</p>
-
-  <h2>Revisions</h2>
-  <p>Included revisions are specified in the project proposal. Work beyond that scope is billed at our standard rate.</p>
-
-  <h2>Limitation of Liability</h2>
-  <p>LIMN is not liable for indirect or consequential damages. Total liability won't exceed what was paid for the project in question.</p>
-
-  <h2>Termination</h2>
-  <p>Either party may end the project with written notice. You're responsible for payment on all work completed up to that point. Deposits are non-refundable.</p>
-
-  <h2>Governing Law</h2>
-  <p>These terms are governed by the laws of the State of Utah. Disputes are handled in Utah courts.</p>
-
-  <h2>Changes</h2>
-  <p>We may update these terms at any time. Continued use of our site means you accept any updates.</p>
-
-  <h2>Contact</h2>
-  <p><a href="mailto:contact@limnsoft.com?subject=Terms%20Inquiry" style="color:var(--accent)">contact@limnsoft.com</a></p>
 </div>
 
 
@@ -1616,19 +1470,6 @@
   document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
 
   // routing
-  function showPage(page) {
-    document.getElementById('home-content').classList.add('hidden');
-    document.querySelectorAll('.legal-page').forEach(p => p.classList.remove('active'));
-    document.getElementById(page + '-page').classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  function showHome() {
-    document.getElementById('home-content').classList.remove('hidden');
-    document.querySelectorAll('.legal-page').forEach(p => p.classList.remove('active'));
-    window.scrollTo(0, 0);
-  }
-
   // custom select dropdown
   document.querySelectorAll('.select-wrap').forEach(wrap => {
     const trigger = wrap.querySelector('.select-trigger');
