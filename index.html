@@ -1192,34 +1192,6 @@
       transform: translate(2px, -2px);
     }
 
-    .work-card-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #0a1520 0%, #0e2030 50%, #0a1820 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .work-card-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .work-card-placeholder-label {
-      font-family: 'ClashDisplay-Variable', 'Clash Display', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
-
     /* ─── REVEAL ─── */
     .reveal {
       opacity: 0;
@@ -1353,14 +1325,7 @@
 
       <a class="work-card reveal" href="https://lvdemos.github.io/lvgymdemo/" target="_blank" rel="noopener">
         <div class="work-card-preview">
-          <div class="work-card-placeholder" style="background:linear-gradient(135deg,#0a0a0a 0%,#181818 50%,#222222 100%)">
-            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:40px 40px;"></div>
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-              <div style="font-family:'ClashDisplay-Variable','Clash Display',sans-serif;font-size:2.5rem;font-weight:400;letter-spacing:0.1em;color:#f6f2e9;text-transform:uppercase;line-height:1">Tidal</div>
-              <div style="font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:#9c9585;margin-top:0.5rem">Gym</div>
-            </div>
-            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent)"></div>
-          </div>
+          <img class="work-card-preview-img" src="work-tidal.jpg" alt="Tidal Athletic gym website homepage" loading="lazy" width="1000" height="640" />
         </div>
         <div class="work-card-body">
           <div class="work-card-info">
@@ -1373,14 +1338,7 @@
 
       <a class="work-card reveal" href="https://lvdemos.github.io/lvlandscapingdemo/" target="_blank" rel="noopener">
         <div class="work-card-preview">
-          <div class="work-card-placeholder" style="background:linear-gradient(225deg,#0a0a0a 0%,#181818 50%,#222222 100%)">
-            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:36px 36px;"></div>
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-              <div style="font-family:'ClashDisplay-Variable','Clash Display',sans-serif;font-size:2rem;font-weight:400;letter-spacing:.08em;color:#f6f2e9;text-transform:uppercase;line-height:1">Verdant</div>
-              <div style="font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:#9c9585;margin-top:.5rem">Landscape Design</div>
-            </div>
-            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent)"></div>
-          </div>
+          <img class="work-card-preview-img" src="work-verdant.jpg" alt="Verdant LA landscaping website homepage" loading="lazy" width="1000" height="640" />
         </div>
         <div class="work-card-body">
           <div class="work-card-info">
