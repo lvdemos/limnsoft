@@ -101,33 +101,6 @@
       will-change: transform;
     }
 
-    /* ─── AMBIENT GLOW ─── */
-    .ambient-blob {
-      position: fixed;
-      z-index: -1;
-      pointer-events: none;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.5;
-      animation: drift 22s ease-in-out infinite;
-    }
-    .ambient-blob-1 {
-      width: 46vw; height: 46vw;
-      top: -12vw; right: -10vw;
-      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-      animation-delay: 0s;
-    }
-    .ambient-blob-2 {
-      width: 34vw; height: 34vw;
-      bottom: 4vw; left: -8vw;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-      animation-delay: -9s;
-    }
-    @keyframes drift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(2vw,3vw) scale(1.08); }
-    }
-
     /* ─── VIGNETTE ─── */
     body::after {
       content: '';
@@ -227,49 +200,6 @@
       border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
-      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-      background-size: 34px 34px;
-      background-position: -10px -10px;
-    }
-
-    /* bottom glow */
-    .hero-glow {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 60%;
-      background: radial-gradient(60% 70% at 50% 100%, rgba(255,255,255,0.12), transparent 75%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* diagonal slash */
-    #home::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 8vw;
-      width: 1px;
-      height: 60%;
-      background: linear-gradient(to bottom, transparent, var(--accent) 50%, transparent);
-      transform: rotate(12deg);
-      transform-origin: top center;
-      opacity: 0.45;
-      pointer-events: none;
-    }
-
-    /* second slash */
-    #home::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: calc(8vw + 2.5rem);
-      width: 1px;
-      height: 60%;
-      background: linear-gradient(to bottom, transparent, var(--border-strong) 50%, transparent);
-      transform: rotate(12deg);
-      transform-origin: top center;
-      opacity: 0.5;
-      pointer-events: none;
     }
 
     .hero-eyebrow {
@@ -337,7 +267,6 @@
 
     @media (max-width: 600px) {
       .hero-bottom { flex-direction: column; gap: 2rem; align-items: flex-start; }
-      #home::before, #home::after { display: none; }
     }
 
     .hero-cta {
@@ -366,8 +295,8 @@
 
     .marquee-track {
       display: flex;
-      animation: marquee 26s linear infinite;
-      width: max-content;
+      justify-content: center;
+      width: 100%;
     }
 
     .marquee-item {
@@ -382,8 +311,6 @@
     }
 
     .marquee-item span { color: var(--accent); }
-    @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-
     /* ─── SHARED ─── */
     section { padding: 8rem 5vw; position: relative; }
     @media (max-width: 600px) { section { padding: 5rem 6vw; } }
@@ -1118,7 +1045,6 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       body::before { animation: none; }
-      .ambient-blob { animation: none; }
       .marquee-track { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
       * { scroll-behavior: auto !important; }
@@ -1128,9 +1054,6 @@
 <body>
 
 <div id="parallax-bg"></div>
-<div class="ambient-blob ambient-blob-1"></div>
-<div class="ambient-blob ambient-blob-2"></div>
-
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">LIMN</a>
@@ -1146,7 +1069,6 @@
 
   <!-- HERO -->
   <section id="home">
-    <div class="hero-glow"></div>
     <div class="hero-eyebrow reveal">AI Receptionist & Web Design</div>
     <h1 class="hero-title reveal">
       Every call answered.<br/>Every lead <em>captured.</em>
@@ -1162,7 +1084,6 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item">AI Receptionist <span>·</span> Lead Capture <span>·</span> Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> Custom Builds <span>·</span></div>
       <div class="marquee-item">AI Receptionist <span>·</span> Lead Capture <span>·</span> Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> Custom Builds <span>·</span></div>
     </div>
   </div>
