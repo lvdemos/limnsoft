@@ -94,7 +94,7 @@
       height: 200%;
       z-index: -1;
       pointer-events: none;
-      background-image: url('bg-texture.jpg');
+      background-image: none;
       background-size: cover;
       background-position: center;
       opacity: 0.14;
@@ -1424,6 +1424,19 @@
 
 
 <script>
+  // Load the decorative texture after the first render.
+  function loadBackgroundTexture() {
+    parallaxBg.style.backgroundImage = "url('bg-texture.jpg')";
+  }
+
+  window.addEventListener('load', () => {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadBackgroundTexture, { timeout: 1500 });
+    } else {
+      setTimeout(loadBackgroundTexture, 0);
+    }
+  }, { once: true });
+
   // parallax background
   const parallaxBg = document.getElementById('parallax-bg');
   let ticking = false;
