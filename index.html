@@ -5,7 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LIMN | AI Receptionist & Web Design</title>
   <meta name="description" content="An AI receptionist built and managed by LIMN, delivered under your brand, paired with website design to match. It answers every call, captures every lead, and works around the clock."/>
+  <link rel="canonical" href="https://limnsoft.com/"/>
   <link rel="icon" type="image/jpeg" href="favicon.JPEG"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://limnsoft.com/"/>
+  <meta property="og:site_name" content="LIMN"/>
+  <meta property="og:title" content="LIMN | AI Receptionist & Web Design"/>
+  <meta property="og:description" content="An AI receptionist built and managed by LIMN, delivered under your brand, paired with website design to match. It answers every call, captures every lead, and works around the clock."/>
+  <meta property="og:image" content="https://limnsoft.com/favicon.JPEG"/>
+
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="LIMN | AI Receptionist & Web Design"/>
+  <meta name="twitter:description" content="An AI receptionist built and managed by LIMN, delivered under your brand, paired with website design to match. It answers every call, captures every lead, and works around the clock."/>
+  <meta name="twitter:image" content="https://limnsoft.com/favicon.JPEG"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
@@ -309,13 +322,18 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.35rem 3rem;
+      gap: 0.5rem 2rem;
       width: 100%;
       padding: 0 1rem;
       text-align: center;
     }
 
-    .marquee-item span { color: var(--accent); }
+    .marquee-word { white-space: nowrap; }
+    .marquee-dot { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .marquee-item { gap: 0.5rem 1.1rem; }
+    }
     /* ─── SHARED ─── */
     section { padding: 8rem 5vw; position: relative; }
     @media (max-width: 600px) { section { padding: 5rem 6vw; } }
@@ -1089,7 +1107,7 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item">AI Receptionist <span>·</span> Lead Capture <span>·</span> Web Design <span>·</span> Web Development <span>·</span> UI / UX <span>·</span> Landing Pages <span>·</span> Custom Builds <span>·</span></div>
+      <div class="marquee-item"><span class="marquee-word">AI Receptionist <span class="marquee-dot">·</span></span><span class="marquee-word">Lead Capture <span class="marquee-dot">·</span></span><span class="marquee-word">Web Design <span class="marquee-dot">·</span></span><span class="marquee-word">Web Development <span class="marquee-dot">·</span></span><span class="marquee-word">UI / UX <span class="marquee-dot">·</span></span><span class="marquee-word">Landing Pages <span class="marquee-dot">·</span></span><span class="marquee-word">Custom Builds</span></div>
     </div>
   </div>
 
