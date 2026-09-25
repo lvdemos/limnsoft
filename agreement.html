@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIMN Client Services Agreement</title>
+<link rel="icon" type="image/jpeg" href="favicon.JPEG">
+<meta name="description" content="LIMN Client Services Agreement. Review the terms for AI and software services and sign electronically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Syne'; src: url('Syne/static/Syne-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: swap; }
+  :root {
+    --ink: #0A0906;
+    --ink-2: #3B3B40;
+    --muted: #76767D;
+    --ground: #F2F1EC;
+    --sheet: #FFFFFF;
+    --paper: #FAF9F6;
+    --rule: #E1DFD8;
+    --rule-soft: #EDECE7;
+    --accent: #1D4B3A;
+    --accent-deep: #123326;
+    --accent-soft: #E7EEE9;
+    --gold: #B8975F;
+    --gold-soft: #D9C7A3;
+    --alert: #A12B2B;
+
+    --sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --display: "Instrument Serif", Georgia, serif;
+    --mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --script: "Mrs Saint Delafield", "Brush Script MT", cursive;
+
+    --topbar-h: 64px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 24px); }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--ground);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    height: var(--topbar-h);
+    display: flex; align-items: center; gap: 20px;
+    padding: 0 32px;
+    background: rgba(12,12,13,.96);
+    backdrop-filter: saturate(140%) blur(8px);
+    color: #fff;
+  }
+  .brand { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+  .brand-word { font-family: 'Syne', var(--sans); font-weight: 800; font-size: 16px; letter-spacing: 0.08em; }
+  .topbar-meta {
+    font-family: var(--mono); font-size: 12px; color: #9A9AA2;
+    padding-left: 20px; border-left: 1px solid #2A2A2E;
+  }
+  .topbar-spacer { flex: 1; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 999px;
+    background: #1B1B1E; color: #D8D8DC; border: 1px solid #2E2E33;
+  }
+  .status svg { width: 14px; height: 14px; flex: none; }
+  .status .i-done { display: none; }
+  .status.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .status.done .i-wait { display: none; }
+  .status.done .i-done { display: block; }
+  .topbar-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #1E1E22; }
+  .topbar-progress span { display: block; height: 100%; width: 0; background: var(--gold); transition: width .25s ease; }
+
+  /* ---------- Layout ---------- */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 860px);
+    justify-content: center;
+    gap: 48px;
+    padding: 48px 32px 112px;
+  }
+
+  /* ---------- Contents rail ---------- */
+  .rail {
+    position: sticky; top: calc(var(--topbar-h) + 48px);
+    align-self: start;
+    max-height: calc(100vh - var(--topbar-h) - 96px);
+    display: flex; flex-direction: column;
+  }
+  .rail-head { padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 8px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .meter { margin-top: 14px; height: 3px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+  .meter span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
+  .meter-label { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
+  .meter-label b { font-variant-numeric: tabular-nums; color: var(--ink); }
+  .toc { list-style: none; margin: 0 -10px; padding: 4px 0; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; }
+  .toc a {
+    display: grid; grid-template-columns: 34px 1fr 14px; align-items: center; gap: 4px;
+    padding: 6px 10px;
+    font-size: 13px; color: var(--ink-2); text-decoration: none; border-radius: 6px;
+  }
+  .toc a:hover { background: rgba(255,255,255,.7); color: var(--ink); }
+  .toc .n { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .toc .tick { width: 14px; height: 14px; opacity: 0; color: var(--accent); transition: opacity .2s; }
+  .toc li.seen .tick { opacity: 1; }
+  .toc li.active a { background: var(--sheet); color: var(--ink); font-weight: 600; box-shadow: inset 2px 0 0 var(--gold); }
+
+  /* ---------- Document sheet ---------- */
+  .sheet {
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(12,12,13,.04), 0 24px 60px -24px rgba(12,12,13,.18);
+    overflow: hidden;
+  }
+
+  /* ---------- Cover ---------- */
+  .cover { position: relative; background: var(--ink); color: #fff; overflow: hidden; }
+  .band { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cover::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(12,12,13,.94) 0%, rgba(12,12,13,.78) 55%, rgba(12,12,13,.35) 100%);
+  }
+  .cover-inner { position: relative; z-index: 1; padding: 52px 64px 44px; }
+  .cover-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .cover .eyebrow { color: var(--gold); }
+  .docno { font-family: var(--mono); font-size: 12px; color: #9A9AA2; }
+  .cover h1 {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(44px, 7vw, 76px); line-height: .98; letter-spacing: -0.015em;
+    margin: 28px 0 22px;
+  }
+  .cover h1 em { font-style: italic; color: var(--gold-soft); }
+  .lede { font-family: var(--serif); font-size: 18px; line-height: 1.6; color: #C9C9CE; max-width: 58ch; margin: 0; }
+
+  .parties {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin: 40px 0 0; border-top: 1px solid rgba(255,255,255,.18);
+  }
+  .parties div { padding: 16px 16px 0 0; }
+  .parties div + div { padding-left: 16px; border-left: 1px solid rgba(255,255,255,.1); }
+  .parties dt { font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8C8C94; }
+  .parties dd { margin: 6px 0 0; font-size: 14px; font-weight: 500; color: #F2F2F4; line-height: 1.4; }
+
+  /* ---------- At a glance ---------- */
+  .glance { padding: 40px 64px 36px; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .glance-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .glance-head small { font-size: 12px; color: var(--muted); }
+  .glance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .glance-grid div { background: var(--sheet); padding: 20px 22px 22px; }
+  .glance-grid .k { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .04em; }
+  .glance-grid h3 { margin: 8px 0 6px; font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.1; }
+  .glance-grid p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+
+  /* ---------- Clauses ---------- */
+  .body { padding: 12px 64px 8px; }
+  .clause {
+    display: grid; grid-template-columns: 64px 1fr; gap: 0 8px;
+    padding: 32px 0; border-bottom: 1px solid var(--rule-soft);
+  }
+  .clause:last-child { border-bottom: 0; }
+  .clause .num {
+    font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent);
+    padding-top: 5px;
+  }
+  .clause h2 {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    margin: 0 0 14px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .pill {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+  }
+  .text { font-family: var(--serif); font-size: 17px; line-height: 1.7; color: #232328; }
+  .text > * { margin: 0; }
+  .text > * + * { margin-top: 12px; }
+  .text b { font-family: var(--sans); font-size: 14.5px; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+  .text ul, .text ol { padding-left: 22px; }
+  .text li + li { margin-top: 4px; }
+  .text li::marker { color: var(--muted); }
+  .clause.key .text { padding-left: 20px; border-left: 2px solid var(--gold); }
+  .caps {
+    font-family: var(--sans) !important; font-size: 13px !important; font-weight: 600; line-height: 1.6 !important;
+    letter-spacing: 0.01em; color: var(--ink) !important;
+    padding: 14px 16px; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
+  }
+
+  .tbl { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 13.5px; line-height: 1.5; }
+  .tbl th {
+    text-align: left; font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    padding: 10px 12px 10px 0; border-bottom: 1px solid var(--ink);
+  }
+  .tbl td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--rule-soft); vertical-align: top; color: var(--ink-2); }
+  .tbl td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .tbl code { font-family: var(--mono); font-size: 12px; }
+  .tbl-wrap { overflow-x: auto; }
+
+  /* ---------- Execution ---------- */
+  .exec { margin: 32px 64px 64px; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; }
+  .exec-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 18px 26px; background: var(--ink); color: #fff;
+  }
+  .exec-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: 0; }
+  .exec-head span { font-family: var(--mono); font-size: 12px; color: #9A9AA2; }
+  .exec-body { padding: 30px 26px 26px; }
+
+  .lock {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px; margin-bottom: 26px;
+    background: var(--accent-soft); border-radius: 4px; color: var(--accent-deep); font-size: 14px; line-height: 1.5;
+  }
+  .lock svg { flex: none; width: 18px; height: 18px; margin-top: 1px; }
+  .lock b { font-variant-numeric: tabular-nums; }
+
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .field input[type="text"], .field input[type="email"] {
+    width: 100%; padding: 13px 14px;
+    font: 500 16px var(--sans); color: var(--ink);
+    background: #fff; border: 1px solid #C9C7C0; border-radius: 4px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,75,58,.16); }
+  .field input:disabled { background: var(--paper); }
+  .field input[aria-invalid="true"] { border-color: var(--alert); }
+  .field .readonly {
+    padding: 13px 14px; font: 500 15px var(--mono); color: var(--ink-2);
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
+  }
+  .error { min-height: 20px; margin-top: 6px; font-size: 13px; color: var(--alert); }
+
+  .sig-pad {
+    position: relative; margin-top: 16px; height: 120px;
+    border-bottom: 1.5px solid var(--ink);
+    background: repeating-linear-gradient(0deg, transparent 0 23px, var(--rule-soft) 23px 24px);
+  }
+  .sig-pad .x { position: absolute; left: 4px; bottom: 8px; font: 600 18px var(--sans); color: var(--muted); }
+  .sig-pad .ink {
+    position: absolute; left: 36px; right: 12px; bottom: -8px;
+    font-family: var(--script); font-size: 64px; line-height: 1; color: #14254F;
+    white-space: nowrap; overflow: hidden; text-overflow: clip;
+  }
+  .sig-pad .placeholder { color: #CFCDC6; }
+  .sig-caption {
+    display: flex; justify-content: space-between; gap: 12px; margin-top: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+
+  .consent {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule-soft);
+    font-size: 14px; line-height: 1.55; color: var(--ink-2); cursor: pointer;
+  }
+  .consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
+
+  .actions { display: flex; align-items: center; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border: 0; border-radius: 4px;
+    font: 600 15px var(--sans); letter-spacing: 0.01em;
+    background: var(--ink); color: #fff; cursor: pointer;
+    transition: background .15s, transform .05s;
+  }
+  .btn:hover { background: var(--accent); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { background: #B5B3AC; cursor: not-allowed; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid #C9C7C0; }
+  .btn.ghost:hover { background: var(--paper); }
+  .actions small { font-size: 12px; color: var(--muted); }
+
+  /* ---------- Certificate ---------- */
+  .cert { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: start; }
+  .seal { position: relative; width: 180px; height: 180px; }
+  .seal svg { width: 100%; height: 100%; }
+  .seal-text {
+    position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent-deep);
+  }
+  .seal-text span { display: block; padding: 8px 10px; background: #fff; border-radius: 3px; }
+  .cert h3 { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: 32px; }
+  .cert .sub { margin: 0 0 20px; color: var(--ink-2); font-size: 14px; }
+  .cert dl { margin: 0; display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid var(--rule); }
+  .cert dt, .cert dd { padding: 10px 0; border-bottom: 1px solid var(--rule-soft); margin: 0; font-size: 13px; }
+  .cert dt { color: var(--muted); font-weight: 600; }
+  .cert dd { font-family: var(--mono); word-break: break-all; }
+  .cert dd.name { font-family: var(--script); font-size: 34px; line-height: .9; color: #14254F; word-break: normal; }
+
+  .foot {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 20px 64px; border-top: 1px solid var(--rule);
+    background: var(--paper); font-size: 12px; color: var(--muted);
+  }
+  .foot code { font-family: var(--mono); color: var(--ink-2); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1120px) {
+    .layout { grid-template-columns: minmax(0, 860px); padding-top: 24px; }
+    .rail { display: none; }
+  }
+  @media (max-width: 720px) {
+    .topbar { padding: 0 16px; gap: 12px; }
+    .topbar-meta { display: none; }
+    .layout { padding: 16px 10px 64px; }
+    .cover-inner { padding: 36px 22px 30px; }
+    .glance { padding: 28px 22px; }
+    .glance-grid { grid-template-columns: 1fr; }
+    .body { padding: 4px 22px; }
+    .exec { margin: 16px 12px 40px; }
+    .exec-body { padding: 22px 16px 18px; }
+    .foot { padding: 16px 22px; }
+    .parties { grid-template-columns: 1fr 1fr; }
+    .parties div:nth-child(3) { padding-left: 0; border-left: 0; }
+    .parties div:nth-child(n+3) { margin-top: 12px; }
+    .clause { grid-template-columns: 1fr; padding: 26px 0; }
+    .clause .num { padding: 0 0 6px; }
+    .clause.key .text { padding-left: 14px; }
+    .text { font-size: 16.5px; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .sig-pad .ink { font-size: 52px; }
+    .cert { grid-template-columns: 1fr; justify-items: start; }
+    .cert dl { grid-template-columns: 1fr; width: 100%; }
+    .cert dt { border-bottom: 0; padding-bottom: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+  @media print {
+    body { background: #fff; }
+    .topbar, .rail, .lock, .actions { display: none !important; }
+    .layout { display: block; padding: 0; }
+    .sheet { border: 0; box-shadow: none; }
+    .cover, .exec-head { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .clause { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="LIMN home">
+    <span class="brand-word">LIMN</span>
+  </a>
+  <div class="topbar-meta">LIMN-CSA · Rev. 1.0</div>
+  <div class="topbar-spacer"></div>
+  <div class="status" id="status" role="status">
+    <svg class="i-wait" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M10.5 2.5l3 3L6 13H3v-3z"/><path d="M9 4l3 3"/></svg>
+    <svg class="i-done" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+    <span id="statusText">Awaiting signature</span>
+  </div>
+  <div class="topbar-progress" aria-hidden="true"><span id="barProgress"></span></div>
+</header>
+
+<div class="layout">
+
+  <nav class="rail" aria-label="Agreement sections">
+    <div class="rail-head">
+      <div class="eyebrow">Review progress</div>
+      <div class="meter" aria-hidden="true"><span id="railMeter"></span></div>
+      <div class="meter-label"><b id="seenCount">0</b> of <b id="totalCount">0</b> sections reviewed</div>
+    </div>
+    <ol class="toc" id="toc"></ol>
+  </nav>
+
+  <main class="sheet">
+    <header class="cover">
+      <svg class="band" id="band" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="cover-inner">
+        <div class="cover-top">
+          <div class="eyebrow">AI &amp; software services</div>
+          <div class="docno">LIMN-CSA · Revision 1.0 · September 2026</div>
+        </div>
+        <h1>Client Services <em>Agreement</em></h1>
+        <p class="lede">These terms govern the AI, automation, and software services LIMN provides to your business. Each project is described in its own Statement of Work. Review every section below; signing unlocks once each has been displayed.</p>
+        <dl class="parties">
+          <div><dt>Provider</dt><dd>LIMN</dd></div>
+          <div><dt>Client</dt><dd>The business named at signing</dd></div>
+          <div><dt>Governing law</dt><dd>State of Utah</dd></div>
+          <div><dt>Disputes</dt><dd>Mediation, then arbitration in Utah</dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="glance" aria-labelledby="glanceTitle">
+      <div class="glance-head">
+        <div class="eyebrow" id="glanceTitle">At a glance</div>
+        <small>A summary for convenience. The full sections below control.</small>
+      </div>
+      <div class="glance-grid">
+        <div><span class="k">§ 5 – 7</span><h3>Deposit, then milestones</h3><p>A deposit starts the work. Milestone invoices are due in 15 days. Refunds and cancellation follow fixed, written rules.</p></div>
+        <div><span class="k">§ 8 – 10</span><h3>AI needs your review</h3><p>AI output can be wrong. You review it before relying on it, and you secure consent for any calls or recordings.</p></div>
+        <div><span class="k">§ 13</span><h3>You own what you pay for</h3><p>Paid deliverables are yours. LIMN keeps its underlying tools, prompts, and frameworks and licenses them to you.</p></div>
+        <div><span class="k">§ 16, 19</span><h3>Capped risk, private resolution</h3><p>Liability is capped at fees paid. Disputes go to mediation, then binding arbitration in Utah.</p></div>
+      </div>
+    </section>
+
+    <article class="body" id="terms">
+
+      <section class="clause" data-title="Parties and purpose"><div class="num">¶</div><div>
+        <h2>Parties and purpose</h2>
+        <div class="text">
+          <p>This Client Services Agreement (the “Agreement”) is between <b>LIMN</b>, a business based in Utah, reachable at contact@limnsoft.com (“Provider,” “we,” or “us”), and the business identified in the signature block below (“Client” or “you”). Provider and Client are each a “party.”</p>
+          <p>Provider designs, builds, and operates AI-enabled software, automations, voice and chat agents, and related services. This Agreement sets the general terms for all work. The specifics of each project (deliverables, timeline, price, and acceptance criteria) are set out in a separate Statement of Work.</p>
+          <p>Client confirms that it is entering this Agreement for business purposes, not for personal, family, or household purposes, and that the person signing has authority to bind Client.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Definitions"><div class="num">§ 1</div><div>
+        <h2>Definitions</h2>
+        <div class="text">
+          <p><b>“AI Output”</b> means any text, audio, voice, image, code, summary, classification, decision, or other content generated by a machine-learning or artificial-intelligence model in connection with the Services.</p>
+          <p><b>“Client Content”</b> means materials, data, instructions, trademarks, and information that Client or its users provide to Provider, including End-User Data.</p>
+          <p><b>“Deliverables”</b> means the items Provider creates specifically for Client and that a Statement of Work expressly identifies as Deliverables.</p>
+          <p><b>“End-User Data”</b> means personal information about Client’s customers, leads, callers, employees, or other individuals that Provider processes on Client’s behalf, including call audio, recordings, transcripts, phone numbers, and messages.</p>
+          <p><b>“Provider Materials”</b> means everything Provider owned, developed, or licensed before or independently of a Statement of Work, and all general improvements to it, including Provider’s software, code libraries, tooling, system prompts, prompt libraries, agent configurations, workflows, templates, evaluation sets, frameworks, methods, and know-how.</p>
+          <p><b>“Services”</b> means the services described in a Statement of Work, including any hosted, managed, or ongoing services.</p>
+          <p><b>“Statement of Work” or “SOW”</b> means a document signed by both parties that references this Agreement and describes a specific project. Exhibit A is the SOW template.</p>
+          <p><b>“Third-Party Services”</b> means software, AI models, APIs, telephony, hosting, and other services supplied by companies other than Provider.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Services and SOWs"><div class="num">§ 2</div><div>
+        <h2>Services and Statements of Work</h2>
+        <div class="text">
+          <p><b>2.1 SOWs.</b> Provider will perform the Services described in each SOW. Each SOW will describe, at a minimum, the Deliverables, timeline and milestones, fees and payment schedule, acceptance criteria, Client responsibilities, and any Third-Party Services involved. Work not described in a SOW is out of scope.</p>
+          <p><b>2.2 Order of precedence.</b> If this Agreement and a SOW conflict, this Agreement controls, unless the SOW states that it overrides a specific numbered section of this Agreement. In that case the SOW controls for that project only.</p>
+          <p><b>2.3 Timelines.</b> Dates in a SOW are good-faith estimates. Provider will use commercially reasonable efforts to meet them. Timelines extend automatically for delays caused by Client, by Third-Party Services, or by events described in Section 21.4.</p>
+          <p><b>2.4 Personnel.</b> Provider decides how, when, and by whom the Services are performed. Provider may use qualified subcontractors and remains responsible for their work under this Agreement.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Client responsibilities"><div class="num">§ 3</div><div>
+        <h2>Client responsibilities and change orders</h2>
+        <div class="text">
+          <p><b>3.1 Cooperation.</b> Client will provide timely access, accounts, content, decisions, and feedback that Provider reasonably requests, and will name a representative with authority to approve work. Provider is not responsible for delays or defects caused by late, inaccurate, or incomplete Client input.</p>
+          <p><b>3.2 Inactive projects.</b> If Client does not respond to a reasonable request for 30 days, Provider may pause the project. If Client remains unresponsive for 60 days, Provider may close the SOW by written notice and invoice for work performed through that date. Restarting a closed project may require a new SOW and schedule.</p>
+          <p><b>3.3 Change orders.</b> Either party may request a change in scope. Changes take effect only when documented in a written change order, which may be confirmed by email, stating the effect on fees and timeline. Unless the SOW says otherwise, additional work is billed at Provider’s then-current hourly rate.</p>
+          <p><b>3.4 Lawful use.</b> Client is responsible for how it uses the Services and Deliverables, including compliance with all laws that apply to Client’s business, its communications with its own customers, and its industry.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Acceptance"><div class="num">§ 4</div><div>
+        <h2>Delivery and acceptance</h2>
+        <div class="text">
+          <p><b>4.1 Review period.</b> When Provider delivers a Deliverable or milestone, Client has 5 business days to review it against the acceptance criteria in the SOW.</p>
+          <p><b>4.2 Rejection.</b> To reject, Client must send written notice within the review period describing each specific failure to meet the acceptance criteria. Provider will correct the reported nonconformities and redeliver, and a new review period will begin for the corrected items.</p>
+          <p><b>4.3 Deemed acceptance.</b> A Deliverable is accepted on the earliest of (a) Client’s written approval, (b) the end of the review period without a compliant rejection notice, or (c) Client’s use of the Deliverable in live production or with its customers.</p>
+          <p><b>4.4 AI criteria.</b> Acceptance criteria for AI features will be functional and testable, such as completing defined test scenarios or meeting a stated success rate on an agreed test set. Occasional incorrect or unexpected AI Output that does not cause the Deliverable to fail its stated criteria is not grounds for rejection (see Section 8).</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Fees and payment"><div class="num">§ 5</div><div>
+        <h2>Fees, deposit, and invoicing <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>5.1 Deposit.</b> Unless the SOW states otherwise, Client will pay a deposit equal to 50% of the SOW’s fixed fee before work begins. Provider is not obligated to schedule or start work until the deposit clears. The deposit is credited toward the final invoice for that SOW.</p>
+          <p><b>5.2 Milestones.</b> Remaining fees are invoiced as stated in the SOW, typically upon acceptance of each milestone. Recurring fees for hosting, maintenance, or managed services are billed monthly in advance.</p>
+          <p><b>5.3 Payment terms.</b> Invoices are due within 15 days of the invoice date, in U.S. dollars, by the methods listed on the invoice. Card payments may carry a processing surcharge where permitted by law and disclosed on the invoice.</p>
+          <p><b>5.4 Pass-through costs.</b> Usage-based charges for Third-Party Services, such as AI model tokens, voice minutes, telephony, phone numbers, and hosting, are billed to Client at cost plus any handling fee stated in the SOW, unless the SOW includes them in a fixed price. Client may instead hold these accounts directly and pay the vendors itself.</p>
+          <p><b>5.5 Taxes.</b> Fees exclude sales, use, and similar taxes. Client is responsible for all such taxes other than taxes on Provider’s income.</p>
+          <p><b>5.6 Billing disputes.</b> Client must notify Provider in writing of any good-faith invoice dispute within 15 days of the invoice date, with details, and must pay the undisputed portion on time. Client agrees to raise any billing concern with Provider under this section, and to give Provider a reasonable opportunity to resolve it, before disputing a charge with its bank or card issuer.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Late payment"><div class="num">§ 6</div><div>
+        <h2>Late payment and suspension</h2>
+        <div class="text">
+          <p><b>6.1 Late fees.</b> Undisputed amounts not paid within 10 days after their due date accrue a late charge of 1.5% per month (18% per year), or the maximum rate permitted by law if that is lower, from the due date until paid.</p>
+          <p><b>6.2 Suspension.</b> If an undisputed amount is more than 15 days past due, Provider may, after 5 days’ written notice, suspend work and any hosted or managed Services until the account is current. Timelines extend by the length of the suspension, and restarting may require rescheduling. Suspension does not relieve Client of its payment obligations.</p>
+          <p><b>6.3 Collection costs.</b> Client will reimburse Provider’s reasonable costs of collecting overdue undisputed amounts, including collection agency fees and reasonable attorneys’ fees.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Refunds and cancellation"><div class="num">§ 7</div><div>
+        <h2>Refunds and cancellation <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>7.1 Deposit.</b> The deposit compensates Provider for reserving capacity and for initial discovery and planning, which are difficult to measure. If Client cancels a SOW in writing before Provider begins work, Provider will refund the deposit less a reservation fee equal to 25% of the deposit and any non-refundable Third-Party costs already incurred. Once Provider begins work, the deposit is non-refundable except as stated in Section 7.4.</p>
+          <p><b>7.2 Cancellation by Client.</b> Client may cancel a SOW for any reason on 14 days’ written notice. Client will pay (a) for all work performed through the effective cancellation date, calculated at the SOW’s hourly rate or, for fixed-fee work, in proportion to Provider’s reasonable, documented estimate of completion of the milestone in progress; (b) all accepted milestones; and (c) non-cancellable Third-Party commitments. Amounts already paid are credited against these charges.</p>
+          <p><b>7.3 Recurring services.</b> Monthly or other recurring Services renew each billing period until cancelled. Client may cancel with at least 30 days’ written notice before the next billing date. Fees for the current billing period are non-refundable.</p>
+          <p><b>7.4 Refunds for Provider’s failure.</b> If Provider materially breaches a SOW and fails to cure within the period in Section 18.2, Client may terminate that SOW and receive a refund of fees prepaid for Deliverables or Services not yet delivered. Fees for accepted milestones and pass-through costs are otherwise non-refundable.</p>
+          <p><b>7.5 Cancellation by Provider.</b> Provider may cancel a SOW for convenience on 30 days’ written notice. In that case, Provider will deliver work completed to date and refund any fees prepaid for work not performed.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="AI output"><div class="num">§ 8</div><div>
+        <h2>AI-generated output <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>8.1 How AI works.</b> The Services use AI models that produce output based on probabilities. AI Output may be inaccurate, incomplete, outdated, biased, offensive, or entirely made up, even when it sounds confident. The same input can produce different output at different times.</p>
+          <p><b>8.2 No guarantee of accuracy.</b> Provider does not guarantee that AI Output will be accurate, complete, error-free, unique, or suitable for any particular purpose, and does not guarantee any accuracy rate, including 100% accuracy. Performance figures in a SOW are targets, not warranties, unless the SOW expressly calls them a warranty.</p>
+          <p><b>8.3 No guarantee of uptime.</b> The Services depend on Third-Party Services and the internet, which Provider does not control. Provider does not guarantee that the Services will be uninterrupted, available at any particular time, or free of latency. Any service level must be stated in a SOW, and the remedies listed there are Client’s only remedies for missing it.</p>
+          <p><b>8.4 Client review.</b> Client is responsible for reviewing, testing, and approving AI Output before relying on it, publishing it, or sending it to anyone, and for keeping appropriate human oversight of any decision based on it. Client is responsible for the decisions it makes and the content it publishes.</p>
+          <p><b>8.5 Not professional advice.</b> AI Output is not legal, medical, financial, tax, or other professional advice and must not be presented to anyone as such.</p>
+          <p><b>8.6 Restricted uses.</b> Unless a SOW expressly covers it and Client takes responsibility for the added legal requirements, Client will not use the Services to make or substantially support decisions about a person’s employment, credit, lending, housing, insurance, education, healthcare, legal services, or access to government benefits. Client will not use the Services to deceive, harass, or defraud anyone, to impersonate a real person without that person’s written consent, or in violation of any law.</p>
+          <p><b>8.7 Disclosure to your customers.</b> Client is responsible for making any disclosure required by law that its customers are interacting with AI or an automated system, including under the Utah Artificial Intelligence Policy Act and California’s bot-disclosure law. By default, Provider configures AI agents to say they are automated when asked, and Client will not instruct Provider to remove that behavior.</p>
+          <p><b>8.8 Model changes.</b> AI vendors change, update, and retire models. Provider will use reasonable efforts to adapt to such changes. Work required by a vendor change that goes beyond routine maintenance will be handled as a change order.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Third-party AI providers"><div class="num">§ 9</div><div>
+        <h2>Third-party AI providers and services</h2>
+        <div class="text">
+          <p><b>9.1 Disclosure.</b> To perform the Services, Provider sends Client Content, prompts, and End-User Data, including call audio and transcripts, to Third-Party Services for processing. These include large-language-model providers (for example, OpenAI, Anthropic, or Google), speech-to-text and text-to-speech providers, telephony and messaging carriers, and cloud hosting and database providers. Provider will give Client a current list of the Third-Party Services used for its project on request.</p>
+          <p><b>9.2 Vendor terms.</b> Where available, Provider uses business or API offerings whose published terms at the time of selection do not permit the vendor to train its models on customer data by default. Third-Party Services are governed by their own terms and privacy policies. Provider is not responsible for their outages, errors, security incidents, pricing changes, or policy changes, except to the extent caused by Provider’s own breach of this Agreement.</p>
+          <p><b>9.3 Client-held accounts.</b> If Client provides its own accounts or API keys, Client is responsible for complying with those vendors’ terms and for all charges on those accounts.</p>
+          <p><b>9.4 No training on your data.</b> Provider will not use Client Content or End-User Data to train or fine-tune AI models offered to other clients. Provider may use aggregated, de-identified usage and performance data that does not identify Client or any individual to operate, secure, and improve its services.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Calls and recording consent"><div class="num">§ 10</div><div>
+        <h2>Automated calls, messages, and recording consent <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>10.1 When this applies.</b> This section applies to any Services that place or answer phone calls, use AI or artificial voices, send text messages, or record or transcribe conversations (“Communications Services”).</p>
+          <p><b>10.2 Client controls the campaign.</b> Client decides whom to contact, when, how often, and with what message, and is responsible for obtaining and documenting every consent required by law. Provider supplies the technology according to Client’s instructions.</p>
+          <p><b>10.3 Recording consent.</b> Client must ensure that every party to a recorded or transcribed call has given any consent required by law before recording begins. Several states require the consent of all parties, including California, Connecticut, Delaware, Florida, Illinois, Maryland, Massachusetts, Michigan, Montana, Nevada, New Hampshire, Oregon, Pennsylvania, and Washington (see Exhibit B). Because a call can be governed by the law of any participant’s state, Client will obtain all-party consent on every recorded call unless Client has confirmed with its own counsel that a narrower practice is lawful for every participant.</p>
+          <p><b>10.4 Default disclosure.</b> Provider configures recorded calls to begin with a disclosure that the call is recorded and handled by an automated assistant. Client may change the wording, but may remove or shorten the disclosure only by written instruction, in which case Client accepts full responsibility for the result. If a party objects to recording, the call must stop recording or end.</p>
+          <p><b>10.5 Telemarketing and autodialer laws.</b> Client will comply with the Telephone Consumer Protection Act (TCPA), the Telemarketing Sales Rule, and state telemarketing and “mini-TCPA” laws. This includes: obtaining prior express consent, and prior express written consent for marketing, before calls or texts using an artificial or prerecorded voice, which the FCC has confirmed includes AI-generated voices; checking the National Do Not Call Registry, applicable state lists, and Client’s internal do-not-call list; honoring opt-outs and revocations of consent promptly; respecting calling-hour limits and state limits on call frequency (for example, Florida limits commercial solicitation calls to 8 a.m.–8 p.m. and three calls per 24 hours on the same subject); transmitting accurate caller ID; and completing any required state telemarketer registration.</p>
+          <p><b>10.6 Voice and likeness.</b> Client will not ask Provider to clone or imitate the voice or likeness of any real person without that person’s prior written consent. Client is responsible for any consent required under biometric-privacy and right-of-publicity laws.</p>
+          <p><b>10.7 Records.</b> Client will keep records of consents, disclosures, and opt-outs for at least five years and provide them to Provider on reasonable request.</p>
+          <p><b>10.8 Provider’s right to pause.</b> Provider may refuse, pause, or modify any campaign, script, contact list, or configuration it reasonably believes may violate law or expose either party to legal risk, without liability. A pause under this section does not reduce fees owed for work performed.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Data handling and privacy"><div class="num">§ 11</div><div>
+        <h2>Data handling and privacy</h2>
+        <div class="text">
+          <p><b>11.1 What we collect.</b> Provider collects and processes: (a) business contact, billing, and signing information, including names, titles, emails, phone numbers, and the signature record created by this page; (b) Client Content; (c) End-User Data processed on Client’s behalf, such as call audio, recordings, transcripts, phone numbers, messages, form entries, and CRM records; and (d) technical and usage data, such as system logs, API usage, and performance metrics.</p>
+          <p><b>11.2 Roles.</b> For End-User Data, Client is the “business” or “controller,” and Provider is Client’s “service provider,” “contractor,” or “processor,” as those terms are used in the California Consumer Privacy Act as amended by the CPRA (“CCPA”), the Utah Consumer Privacy Act, and similar state privacy laws.</p>
+          <p><b>11.3 Service-provider commitments.</b> For End-User Data, Provider will: (a) process it only to perform the Services and for the business purposes described in the SOW; (b) not sell or share it, as those terms are defined in the CCPA; (c) not retain, use, or disclose it outside the direct business relationship with Client or for any purpose other than those listed here; (d) not combine it with personal information from other sources except as the CCPA permits; (e) comply with the obligations that apply to service providers under applicable privacy laws and provide the same level of privacy protection they require; (f) notify Client if Provider determines it can no longer meet these obligations; (g) allow Client to take reasonable steps to stop and remediate any unauthorized use; (h) help Client respond to consumer privacy requests; (i) bind its subprocessors to written terms at least as protective; and (j) once per year, on written request, answer a reasonable security and privacy questionnaire.</p>
+          <p><b>11.4 Storage.</b> Data is stored with Provider’s cloud and Third-Party Service vendors, primarily in the United States. Provider maintains commercially reasonable administrative, technical, and physical safeguards suited to the nature of the data, including encryption in transit, encryption at rest where the vendor supports it, access limited to personnel who need it, and multi-factor authentication on administrative accounts.</p>
+          <p><b>11.5 Retention.</b> Unless the SOW sets a different period: call recordings and transcripts are kept for 90 days after they are created; other Client Content and End-User Data are kept for the term of the applicable SOW. Within 30 days after a SOW ends, Provider will delete or return the related Client Content and End-User Data, and Client may request an export in a standard format during that window. Residual copies in routine backups are deleted as backups rotate, within 90 days. Contracts, invoices, and signing records are kept as long as needed for legal, tax, and accounting purposes.</p>
+          <p><b>11.6 Deletion on request.</b> Client may ask Provider at any time to delete specific Client Content or End-User Data. Provider will delete it within 30 days and confirm in writing, except where retention is required by law or a legal hold. Provider will forward any privacy request it receives directly from an individual to Client within 5 business days and will not respond to it on Client’s behalf unless Client instructs otherwise.</p>
+          <p><b>11.7 Data Client must not send.</b> Unless a SOW expressly covers it and the parties sign any additional agreement the law requires, Client will not provide: protected health information subject to HIPAA (which requires a business associate agreement); full payment-card numbers; Social Security or government ID numbers; biometric identifiers; data about children under 13; or personal data of individuals in the EU, UK, or other jurisdictions that require a separate data processing agreement.</p>
+          <p><b>11.8 Client’s notices.</b> Client is responsible for giving its customers and users the privacy notices and obtaining the consents required by law, including notice that their data is processed by vendors, AI systems, and call-recording tools as described in this Agreement.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Security incidents"><div class="num">§ 12</div><div>
+        <h2>Security incidents</h2>
+        <div class="text">
+          <p>If Provider confirms unauthorized access to or disclosure of End-User Data in Provider’s possession or control, Provider will notify Client without undue delay and in any event within 72 hours after confirmation, share the information reasonably available to it, take reasonable steps to contain the incident, and cooperate with Client’s investigation. Client decides whether and how to notify affected individuals and regulators, unless the law requires Provider to do so directly. Notice of an incident is not an admission of fault.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Intellectual property"><div class="num">§ 13</div><div>
+        <h2>Intellectual property <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>13.1 What Client owns.</b> Client keeps all rights in Client Content. When Client has paid in full for a SOW, Provider assigns to Client all of Provider’s right, title, and interest in the Deliverables under that SOW, excluding Provider Materials and Third-Party materials. Until full payment, Client has a limited license to use the Deliverables to review and test them.</p>
+          <p><b>13.2 What Provider keeps.</b> Provider keeps all rights in Provider Materials, including its tooling, system prompts, prompt libraries, agent configurations, workflows, frameworks, templates, and code libraries, even when they are built into a Deliverable. Prompts and configurations are Provider Materials unless the SOW expressly lists them as Deliverables.</p>
+          <p><b>13.3 License to Provider Materials.</b> When Client has paid in full, Provider grants Client a non-exclusive, perpetual, royalty-free license to use the Provider Materials built into the Deliverables, solely to use and maintain those Deliverables for Client’s own business. The license may be transferred only with a sale of Client’s business. Client will not extract, resell, or sublicense Provider Materials separately, reverse engineer them, or use them to build a competing product or service.</p>
+          <p><b>13.4 Hosted services.</b> If Provider hosts or operates a solution for Client, Client’s right to access it lasts for the term of the applicable SOW. When that term ends, Provider will export Client’s data and, on request, help transition the solution at Provider’s then-current rates.</p>
+          <p><b>13.5 Rights in AI Output.</b> Copyright law may not protect material generated entirely by AI. Provider assigns whatever rights it has in AI Output within the Deliverables, but does not promise that AI Output is protectable by copyright or that similar output will not be generated for others.</p>
+          <p><b>13.6 Third-party materials.</b> Open-source software, stock assets, and Third-Party Services included in a Deliverable remain subject to their own licenses, which Provider will identify on request.</p>
+          <p><b>13.7 Feedback and know-how.</b> Provider may freely use suggestions Client offers about Provider’s services, and may reuse the general skills, knowledge, and techniques it gains, as long as it does not disclose Client’s Confidential Information.</p>
+          <p><b>13.8 Portfolio.</b> Provider may identify Client by name and logo as a client and describe the project in general, non-confidential terms, unless Client opts out in writing.</p>
+          <p><b>13.9 Not work for hire.</b> The parties are independent contractors. Transfers of ownership happen only by the assignment in Section 13.1, not under any “work made for hire” doctrine.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Confidentiality"><div class="num">§ 14</div><div>
+        <h2>Confidentiality (mutual non-disclosure)</h2>
+        <div class="text">
+          <p><b>14.1 Definition.</b> “Confidential Information” means non-public information one party (the “discloser”) shares with the other (the “recipient”) that is marked confidential or that a reasonable person would understand to be confidential, including business plans, pricing, customer data, source code, prompts, and the terms of any SOW. Client’s Confidential Information includes Client Content. Provider’s Confidential Information includes Provider Materials.</p>
+          <p><b>14.2 Exclusions.</b> Confidential Information does not include information that the recipient can show (a) is or becomes public through no fault of the recipient, (b) it already knew without a duty of confidentiality, (c) it received from a third party without a duty of confidentiality, or (d) it developed independently without using the discloser’s information.</p>
+          <p><b>14.3 Obligations.</b> The recipient will use Confidential Information only to perform or receive the Services, protect it with at least reasonable care, and disclose it only to its employees, contractors, advisers, and Third-Party Services that need it for this Agreement and are bound by confidentiality obligations at least as protective. Each party is responsible for breaches by those it discloses to.</p>
+          <p><b>14.4 Required disclosure.</b> The recipient may disclose Confidential Information when required by law or court order, if it gives the discloser prompt notice (where legally allowed) and reasonable help seeking protection, and discloses only what is required.</p>
+          <p><b>14.5 Duration and return.</b> These obligations continue during this Agreement and for three years after it ends, and for trade secrets for as long as they remain trade secrets. On request after termination, the recipient will return or destroy the discloser’s Confidential Information, except copies kept in routine backups or required by law, which remain protected.</p>
+          <p><b>14.6 Remedies.</b> Unauthorized disclosure may cause harm that money cannot adequately fix, so the discloser may seek an injunction in addition to other remedies, without posting a bond where the law allows.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Warranties and disclaimers"><div class="num">§ 15</div><div>
+        <h2>Warranties and disclaimers <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>15.1 Mutual.</b> Each party represents that it has authority to enter this Agreement and that doing so does not violate any other agreement it is bound by.</p>
+          <p><b>15.2 Provider.</b> Provider warrants that it will perform the Services in a professional and workmanlike manner consistent with generally accepted industry standards. If Client notifies Provider in writing of a breach of this warranty within 30 days after delivery, Provider will re-perform the nonconforming Services. If Provider cannot do so within a reasonable time, Client may terminate the affected SOW and receive a refund of the fees paid for the nonconforming Services. This is Client’s exclusive remedy for breach of this warranty.</p>
+          <p><b>15.3 Client.</b> Client warrants that it has all rights and consents needed to provide Client Content and End-User Data to Provider and to have Provider use them as this Agreement describes, and that its instructions to Provider comply with law.</p>
+          <p class="caps">15.4 DISCLAIMER. EXCEPT AS EXPRESSLY STATED IN THIS SECTION 15, THE SERVICES, DELIVERABLES, AI OUTPUT, AND THIRD-PARTY SERVICES ARE PROVIDED “AS IS” AND “AS AVAILABLE.” TO THE FULLEST EXTENT PERMITTED BY LAW, PROVIDER DISCLAIMS ALL OTHER WARRANTIES, WHETHER EXPRESS, IMPLIED, OR STATUTORY, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, AND ACCURACY, AND ANY WARRANTY THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE, OR WILL ACHIEVE ANY PARTICULAR BUSINESS RESULT.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Limitation of liability"><div class="num">§ 16</div><div>
+        <h2>Limitation of liability <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p class="caps">16.1 EXCLUDED DAMAGES. TO THE FULLEST EXTENT PERMITTED BY LAW, NEITHER PARTY WILL BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, OR FOR ANY LOST PROFITS, LOST REVENUE, LOST BUSINESS OPPORTUNITIES, LOSS OF GOODWILL, OR LOSS OR CORRUPTION OF DATA, ARISING OUT OF OR RELATING TO THIS AGREEMENT, HOWEVER CAUSED AND UNDER ANY THEORY OF LIABILITY, EVEN IF ADVISED OF THEIR POSSIBILITY.</p>
+          <p class="caps">16.2 CAP. TO THE FULLEST EXTENT PERMITTED BY LAW, PROVIDER’S TOTAL LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT AND ALL SOWS, UNDER ANY THEORY, WILL NOT EXCEED THE TOTAL FEES ACTUALLY PAID BY CLIENT TO PROVIDER UNDER THIS AGREEMENT DURING THE TWELVE (12) MONTHS IMMEDIATELY BEFORE THE EVENT THAT FIRST GAVE RISE TO LIABILITY, EXCLUDING PASS-THROUGH THIRD-PARTY COSTS.</p>
+          <p><b>16.3 Exceptions.</b> Sections 16.1 and 16.2 do not limit (a) Client’s obligation to pay fees; (b) Client’s obligations under Section 10 and Section 17.1; or (c) liability for fraud, gross negligence, or willful misconduct, or any other liability that cannot be limited under applicable law.</p>
+          <p><b>16.4 Basis of the bargain.</b> The parties agree these limits allocate risk fairly, are reflected in Provider’s pricing, and apply even if a limited remedy fails of its essential purpose.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Indemnification"><div class="num">§ 17</div><div>
+        <h2>Indemnification</h2>
+        <div class="text">
+          <p><b>17.1 By Client.</b> Client will defend Provider and its owners, personnel, and contractors against any third-party claim, demand, fine, or government investigation, and pay the resulting damages, settlements, penalties, and reasonable attorneys’ fees, to the extent arising from: (a) Client Content; (b) Client’s use of the Services, Deliverables, or AI Output; (c) any call, text message, recording, or transcription made through the Communications Services, including claims under the TCPA or any recording-consent, telemarketing, privacy, biometric, or right-of-publicity law; (d) Client’s failure to give required notices or obtain required consents; or (e) Client’s breach of law or of Sections 8, 10, or 11.</p>
+          <p><b>17.2 By Provider.</b> Provider will defend Client against any third-party claim alleging that Provider Materials, as delivered by Provider, infringe a United States copyright or misappropriate a trade secret, and pay the resulting damages and settlements Provider agrees to. Provider has no obligation for claims arising from Client Content, AI Output, Third-Party Services or materials, modifications not made by Provider, or combinations with items not supplied by Provider. If such a claim occurs or seems likely, Provider may modify the materials to be non-infringing, obtain a license, or terminate the affected Services and refund prepaid fees for the undelivered portion. This section states Provider’s entire obligation for infringement claims.</p>
+          <p><b>17.3 Process.</b> The party seeking protection must notify the other promptly (a delay excuses the obligation only to the extent it causes prejudice), give it control of the defense and settlement, and reasonably cooperate at its expense. No settlement may impose an admission or obligation on the protected party without its consent, which will not be unreasonably withheld.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Term and termination"><div class="num">§ 18</div><div>
+        <h2>Term and termination</h2>
+        <div class="text">
+          <p><b>18.1 Term.</b> This Agreement begins on the Effective Date and continues until terminated. Each SOW runs for the term it states. Either party may terminate this Agreement on 30 days’ written notice when no SOW is active.</p>
+          <p><b>18.2 Termination for breach.</b> Either party may terminate this Agreement or an affected SOW if the other party materially breaches it and does not cure the breach within 15 days after receiving written notice describing it, or within 10 days for failure to pay undisputed fees.</p>
+          <p><b>18.3 Immediate termination.</b> Either party may terminate immediately by written notice if the other becomes insolvent, makes an assignment for the benefit of creditors, or becomes subject to bankruptcy proceedings that are not dismissed within 60 days. Provider may suspend or terminate immediately if Client’s use of the Services violates law or Sections 8.6 or 10, or exposes Provider to a credible threat of legal liability.</p>
+          <p><b>18.4 Effect of termination.</b> On termination, Client will pay all fees for work performed and costs incurred through the termination date; Provider will deliver completed, paid-for work and handle data as described in Section 11.5; and the licenses in Section 13 continue for Deliverables that have been paid for in full.</p>
+          <p><b>18.5 Survival.</b> Sections 1, 5 through 7 (as to amounts owed), 8, 9, 10.7, 11, 13, 14, 15.4, 16, 17, 18.4, 19, 20, and 21 survive termination.</p>
+        </div>
+      </div></section>
+
+      <section class="clause key" data-title="Dispute resolution"><div class="num">§ 19</div><div>
+        <h2>Dispute resolution <span class="pill">Key term</span></h2>
+        <div class="text">
+          <p><b>19.1 Talk first.</b> A party with a dispute will send the other a written notice describing it. Representatives with decision-making authority will meet, in person or by video, within 15 days and try in good faith to resolve it.</p>
+          <p><b>19.2 Mediation.</b> If the dispute is not resolved within 30 days after the notice, either party may start non-binding mediation with a mutually agreed mediator in Salt Lake County, Utah, or by video. The parties will share the mediator’s fees equally and pay their own costs.</p>
+          <p><b>19.3 Binding arbitration.</b> If the dispute is not resolved within 60 days after mediation begins, or if a party refuses to mediate, the dispute will be finally resolved by binding arbitration administered by the American Arbitration Association under its Commercial Arbitration Rules, before a single arbitrator. The arbitration will be seated in Salt Lake County, Utah, and hearings may be held by video. The arbitrator will apply Utah law and the terms of this Agreement, including Sections 15 and 16, and judgment on the award may be entered in any court with jurisdiction. The Federal Arbitration Act governs this Section 19.</p>
+          <p><b>19.4 Exceptions.</b> Either party may (a) bring an individual claim within the jurisdiction of a small claims court, or (b) ask a court for a temporary restraining order or injunction to protect its intellectual property or Confidential Information, or to preserve the status quo pending arbitration.</p>
+          <p><b>19.5 Individual claims only.</b> Claims may be brought only in a party’s individual capacity, not as a plaintiff or class member in any class, collective, or representative proceeding.</p>
+          <p><b>19.6 Confidentiality and fees.</b> Mediation and arbitration proceedings and results are confidential except as needed to enforce an award or as required by law. In any arbitration or court action under this Agreement, the prevailing party may recover its reasonable attorneys’ fees and costs.</p>
+          <p class="caps">19.7 JURY WAIVER. TO THE FULLEST EXTENT PERMITTED BY LAW, EACH PARTY WAIVES ANY RIGHT TO A JURY TRIAL IN ANY COURT PROCEEDING ARISING OUT OF OR RELATING TO THIS AGREEMENT.</p>
+          <p><b>19.8 Time limit.</b> Except for claims to collect unpaid fees or for indemnification, any claim arising out of this Agreement must be brought within one year after the claiming party knew or reasonably should have known of it, or it is barred, to the extent permitted by law.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Governing law"><div class="num">§ 20</div><div>
+        <h2>Governing law and venue</h2>
+        <div class="text">
+          <p>This Agreement is governed by the laws of the State of Utah, without regard to its conflict-of-laws rules, and by applicable federal law. The United Nations Convention on Contracts for the International Sale of Goods does not apply. For any matter permitted to proceed in court under Section 19.4 or to enforce an arbitration award, the parties consent to the exclusive jurisdiction of the state and federal courts located in Salt Lake County, Utah. Nothing in this Agreement waives any protection that cannot be waived under the laws that apply to a party.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="General provisions"><div class="num">§ 21</div><div>
+        <h2>General provisions</h2>
+        <div class="text">
+          <p><b>21.1 Independent contractors.</b> The parties are independent contractors. This Agreement creates no partnership, joint venture, employment, or agency relationship.</p>
+          <p><b>21.2 Non-exclusivity.</b> Provider may perform similar services for others, including Client’s competitors, without using Client’s Confidential Information.</p>
+          <p><b>21.3 Notices.</b> Notices must be in writing and may be sent by email to the addresses in the signature block or SOW (Provider: contact@limnsoft.com). Notices of breach, termination, or a dispute must also be marked “Legal Notice” in the subject line. A notice is effective when sent, unless the sender receives an automated failure message.</p>
+          <p><b>21.4 Force majeure.</b> Neither party is liable for delay or failure caused by events beyond its reasonable control, including natural disasters, pandemics, war, government action, labor disputes, utility or internet failures, cyberattacks not caused by that party’s negligence, and outages or changes of Third-Party Services. This does not excuse payment obligations.</p>
+          <p><b>21.5 Assignment.</b> Neither party may assign this Agreement without the other’s written consent, except to a successor in a merger or sale of all or substantially all of its business or assets, with notice to the other party. Provider may also assign this Agreement and any SOW, with notice to Client, to a business entity formed to carry on the LIMN business.</p>
+          <p><b>21.6 Entire agreement and amendments.</b> This Agreement, its exhibits, and all SOWs are the parties’ entire agreement on this subject and replace all prior proposals and understandings. Client’s purchase orders or other terms do not apply. Amendments must be in writing and signed by both parties, except that change orders may be confirmed by email under Section 3.3.</p>
+          <p><b>21.7 Severability.</b> If any provision is held unenforceable, it will be enforced to the maximum extent permitted and modified only as much as necessary to make it enforceable, and the rest of the Agreement remains in effect.</p>
+          <p><b>21.8 Waiver.</b> A failure or delay in enforcing a right is not a waiver of it. A waiver is effective only in writing.</p>
+          <p><b>21.9 No third-party beneficiaries.</b> Except for the persons protected by Section 17, no one other than the parties has rights under this Agreement.</p>
+          <p><b>21.10 Interpretation.</b> Headings and the “At a glance” summary are for convenience and do not affect interpretation. “Including” means “including without limitation.” This Agreement will not be interpreted against either party as its drafter.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Electronic signature"><div class="num">§ 22</div><div>
+        <h2>Electronic signature and effective date</h2>
+        <div class="text">
+          <p>The parties agree to sign and keep this Agreement electronically under the Utah Uniform Electronic Transactions Act and the federal E-SIGN Act. Typing a full legal name and confirming below is Client’s electronic signature and has the same effect as a handwritten signature. Client may request a paper copy at any time at no charge. This Agreement takes effect on the date Client signs (the “Effective Date”) and is accepted by Provider when Provider countersigns it, confirms acceptance in writing (including by email), or begins performance, whichever comes first.</p>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Exhibit A · SOW template"><div class="num">Ex. A</div><div>
+        <h2>Exhibit A — Statement of Work template</h2>
+        <div class="text">
+          <p>Each project uses a SOW with the sections below. A SOW is binding only when signed by both parties and becomes part of this Agreement.</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <thead><tr><th>Section</th><th>What it must contain</th></tr></thead>
+            <tbody>
+              <tr><td>1. Header</td><td>SOW number, date, Client legal name, a reference to this Agreement (LIMN-CSA Rev. 1.0), and each party’s project lead and notice email.</td></tr>
+              <tr><td>2. Objective</td><td>The business outcome in two or three sentences, such as “Answer inbound service calls after hours and book appointments into the Client’s calendar.”</td></tr>
+              <tr><td>3. Deliverables</td><td>An itemized list. For each item: name, description, format or platform, and whether it is a one-time Deliverable or an ongoing Service. State whether any prompts or configurations are Deliverables (Section 13.2).</td></tr>
+              <tr><td>4. Out of scope</td><td>Work that is expressly excluded, such as content writing, third-party integrations not listed, data migration, or ongoing support after launch.</td></tr>
+              <tr><td>5. Client inputs</td><td>Access, accounts, content, data, approvers, and the dates Client must provide them. Note that timelines depend on these dates.</td></tr>
+              <tr><td>6. Timeline</td><td>A milestone table: milestone, target date or week, Deliverables included, and payment due at acceptance.</td></tr>
+              <tr><td>7. Acceptance criteria</td><td>For each Deliverable, objective and testable criteria. For AI features, a defined test set or scenario list and a target success rate, such as “completes 18 of 20 scripted booking scenarios.” Never “100% accurate.”</td></tr>
+              <tr><td>8. Fees</td><td>Pricing model (fixed, hourly, or monthly), total fee, deposit percentage, milestone payments, recurring fees, the hourly rate for change orders, and how pass-through costs are billed.</td></tr>
+              <tr><td>9. Third-Party Services</td><td>The AI, telephony, hosting, and software vendors used, and whether each account is held by Provider or Client.</td></tr>
+              <tr><td>10. Data and retention</td><td>Categories of End-User Data processed, storage location, and retention periods for recordings, transcripts, and other data if different from Section 11.5.</td></tr>
+              <tr><td>11. Communications</td><td>If calls, texts, or recordings are involved: inbound or outbound, target states, how consent is obtained and recorded, and the approved opening disclosure script.</td></tr>
+              <tr><td>12. Support and service levels</td><td>Support hours, response targets, maintenance included, and any service level with its remedies (Section 8.3).</td></tr>
+              <tr><td>13. Special terms</td><td>Any term that overrides this Agreement, naming the exact section it overrides (Section 2.2).</td></tr>
+              <tr><td>14. Signatures</td><td>Name, title, signature, and date for both parties.</td></tr>
+            </tbody>
+          </table></div>
+          <p><b>Example milestone table.</b></p>
+          <div class="tbl-wrap"><table class="tbl">
+            <thead><tr><th>Milestone</th><th>Target</th><th>Deliverables</th><th>Payment</th></tr></thead>
+            <tbody>
+              <tr><td>M0 · Kickoff</td><td>On signing</td><td>Signed SOW, access checklist</td><td>50% deposit</td></tr>
+              <tr><td>M1 · Design</td><td>Week 2</td><td>Solution brief, call flows, test set</td><td>—</td></tr>
+              <tr><td>M2 · Build</td><td>Week 4</td><td>Working agent in staging, test report</td><td>25%</td></tr>
+              <tr><td>M3 · Launch</td><td>Week 6</td><td>Production launch, handoff documentation</td><td>25%</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div></section>
+
+      <section class="clause" data-title="Exhibit B · Recording laws"><div class="num">Ex. B</div><div>
+        <h2>Exhibit B — All-party consent states for call recording</h2>
+        <div class="text">
+          <p>This summary is provided for convenience, is not legal advice, and may change. Most other states and federal law allow recording with the consent of one party, but Client must obtain all-party consent on every recorded call under Section 10.3.</p>
+          <div class="tbl-wrap"><table class="tbl">
+            <thead><tr><th>State</th><th>Rule</th><th>Primary source</th></tr></thead>
+            <tbody>
+              <tr><td>California</td><td>All parties to a confidential communication; separate rules for cellular calls. Applied to calls with California residents even when the caller is out of state.</td><td><code>Cal. Penal Code §§ 632, 632.7</code></td></tr>
+              <tr><td>Connecticut</td><td>All parties for telephone calls (civil liability); criminal statute is one-party.</td><td><code>Conn. Gen. Stat. § 52-570d</code></td></tr>
+              <tr><td>Delaware</td><td>Statutes conflict; treat as all-party.</td><td><code>11 Del. C. §§ 1335, 2402</code></td></tr>
+              <tr><td>Florida</td><td>All parties.</td><td><code>Fla. Stat. § 934.03</code></td></tr>
+              <tr><td>Illinois</td><td>All parties to a private conversation.</td><td><code>720 ILCS 5/14-2</code></td></tr>
+              <tr><td>Maryland</td><td>All parties.</td><td><code>Md. Cts. &amp; Jud. Proc. § 10-402</code></td></tr>
+              <tr><td>Massachusetts</td><td>All parties; secret recording prohibited.</td><td><code>Mass. Gen. Laws ch. 272, § 99</code></td></tr>
+              <tr><td>Michigan</td><td>Courts differ on participant recording; treat as all-party.</td><td><code>MCL § 750.539c</code></td></tr>
+              <tr><td>Montana</td><td>All parties, with limited exceptions.</td><td><code>Mont. Code § 45-8-213</code></td></tr>
+              <tr><td>Nevada</td><td>All parties for telephone calls.</td><td><code>NRS § 200.620</code></td></tr>
+              <tr><td>New Hampshire</td><td>All parties.</td><td><code>RSA 570-A:2</code></td></tr>
+              <tr><td>Oregon</td><td>All parties for in-person conversations; one party for phone calls. Treat as all-party.</td><td><code>ORS § 165.540</code></td></tr>
+              <tr><td>Pennsylvania</td><td>All parties.</td><td><code>18 Pa. C.S. §§ 5703, 5704</code></td></tr>
+              <tr><td>Washington</td><td>All parties; an announcement that is itself recorded satisfies the rule.</td><td><code>RCW § 9.73.030</code></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div></section>
+    </article>
+
+    <section class="exec" id="execution" aria-labelledby="execTitle">
+      <div class="exec-head">
+        <h2 id="execTitle">Execution by Client</h2>
+        <span id="execDate"></span>
+      </div>
+
+      <div class="exec-body" id="signForm">
+        <div class="lock" id="lock">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="1.5"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>
+          <div id="lockText">Signing is locked until every section has been reviewed. <b id="lockCount">0</b> reviewed so far.</div>
+        </div>
+
+        <form id="form" novalidate>
+          <div class="sig-grid">
+            <div class="field">
+              <label for="company">Client legal name</label>
+              <input type="text" id="company" autocomplete="organization" placeholder="Company name and entity type" aria-describedby="companyError" disabled>
+              <div class="error" id="companyError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="email">Notice email</label>
+              <input type="email" id="email" autocomplete="email" placeholder="name@company.com" aria-describedby="emailError" disabled>
+              <div class="error" id="emailError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="name">Signer’s full legal name</label>
+              <input type="text" id="name" autocomplete="name" placeholder="First and last name" aria-describedby="nameError" disabled>
+              <div class="error" id="nameError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label for="title">Signer’s title</label>
+              <input type="text" id="title" autocomplete="organization-title" placeholder="e.g. Owner, CEO" aria-describedby="titleError" disabled>
+              <div class="error" id="titleError" aria-live="polite"></div>
+            </div>
+            <div class="field">
+              <label>Date of execution</label>
+              <div class="readonly" id="today"></div>
+            </div>
+          </div>
+
+          <div class="sig-pad" aria-hidden="true">
+            <span class="x">×</span>
+            <span class="ink placeholder" id="ink">Your signature</span>
+          </div>
+          <div class="sig-caption"><span>Client signature — typed electronic</span><span>Binding under § 22</span></div>
+
+          <label class="consent">
+            <input type="checkbox" id="consent" disabled>
+            <span>I have reviewed the LIMN Client Services Agreement (LIMN-CSA, Rev. 1.0), including Exhibits A and B, in full. I am authorized to sign for the Client named above, and I agree on its behalf to be bound by these terms. I understand my typed name is my legal signature.</span>
+          </label>
+          <div class="error" id="consentError" aria-live="polite"></div>
+
+          <div class="actions">
+            <button type="submit" class="btn" id="signBtn" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12.5c2-1 3-5 5-5s1 4 3 4 2.5-2 4-3"/><path d="M2 14.5h12"/></svg>
+              Sign agreement
+            </button>
+            <small>Signing records the details above, the time, and the document fingerprint.</small>
+          </div>
+        </form>
+      </div>
+
+      <div class="exec-body" id="certificate" hidden>
+        <div class="cert">
+          <div class="seal">
+            <svg id="seal" viewBox="0 0 200 200" aria-hidden="true"></svg>
+            <div class="seal-text"><span>EXECUTED</span></div>
+          </div>
+          <div>
+            <h3>Agreement signed</h3>
+            <p class="sub">This is your certificate of completion. Print a copy for your records. The Agreement is accepted by LIMN on countersignature or written confirmation (§ 22).</p>
+            <dl>
+              <dt>Signed by</dt><dd class="name" id="cName"></dd>
+              <dt>Legal name</dt><dd id="cLegal"></dd>
+              <dt>Title</dt><dd id="cTitle"></dd>
+              <dt>Client</dt><dd id="cCompany"></dd>
+              <dt>Notice email</dt><dd id="cEmail"></dd>
+              <dt>Signed at</dt><dd id="cTime"></dd>
+              <dt>Provider</dt><dd>LIMN · countersignature pending</dd>
+              <dt>Document</dt><dd>LIMN-CSA · Revision 1.0</dd>
+              <dt>Fingerprint</dt><dd id="cDoc"></dd>
+              <dt>Signature ID</dt><dd id="cSig"></dd>
+            </dl>
+            <div class="actions">
+              <button type="button" class="btn ghost" onclick="window.print()">Print a copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>LIMN Client Services Agreement · LIMN-CSA · Rev. 1.0</span>
+      <span>SHA-256 <code id="docHash">computing…</code></span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const TAU = Math.PI * 2;
+
+  /* ---------- Guilloche line-work (security-print pattern) ---------- */
+  function path(svg, d, stroke, width, opacity) {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', stroke);
+    p.setAttribute('stroke-width', width);
+    p.setAttribute('stroke-opacity', opacity);
+    svg.appendChild(p);
+  }
+
+  function rosette(svg, cx, cy, layers) {
+    layers.forEach(({ R, A, k, n, stroke, w, o }) => {
+      for (let i = 0; i < n; i++) {
+        const phase = (i / n) * (TAU / k);
+        let d = '';
+        for (let s = 0; s <= 720; s++) {
+          const t = (s / 720) * TAU;
+          const r = R + A * Math.sin(k * t + phase * k);
+          d += (s ? 'L' : 'M') + (cx + r * Math.cos(t)).toFixed(2) + ' ' + (cy + r * Math.sin(t)).toFixed(2);
+        }
+        path(svg, d + 'Z', stroke, w, o);
+      }
+    });
+  }
+
+  function band(svg) {
+    for (let j = 0; j < 40; j++) {
+      let d = '';
+      for (let x = 0; x <= 1200; x += 4) {
+        const y = 300 + 70 * Math.sin(x / 70 + j * 0.17) * Math.cos(x / 300 - j * 0.06)
+                     + 14 * Math.sin(x / 19 + j * 0.45) - j * 3;
+        d += (x ? 'L' : 'M') + x + ' ' + y.toFixed(2);
+      }
+      path(svg, d, j % 2 ? '#B8975F' : '#6F6F78', 0.6, j % 2 ? 0.5 : 0.35);
+    }
+    rosette(svg, 1010, 170, [
+      { R: 120, A: 22, k: 18, n: 14, stroke: '#B8975F', w: 0.5, o: 0.55 },
+      { R: 82,  A: 14, k: 13, n: 10, stroke: '#8A8A92', w: 0.5, o: 0.5 },
+      { R: 46,  A: 8,  k: 9,  n: 8,  stroke: '#B8975F', w: 0.5, o: 0.6 }
+    ]);
+  }
+
+  band(document.getElementById('band'));
+
+  /* ---------- Review tracking ---------- */
+  const sections = [...document.querySelectorAll('#terms .clause')];
+  const toc = document.getElementById('toc');
+  const total = sections.length;
+  const seen = new Set();
+  document.getElementById('totalCount').textContent = total;
+
+  sections.forEach((s, i) => {
+    s.id = 'c' + i;
+    const li = document.createElement('li');
+    const num = s.querySelector('.num').textContent;
+    li.innerHTML = `<a href="#c${i}"><span class="n">${num}</span><span></span>
+      <svg class="tick" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7.5l2.5 2.5L11 4.5"/></svg></a>`;
+    li.querySelector('span + span').textContent = s.dataset.title;
+    toc.appendChild(li);
+  });
+  const tocItems = [...toc.children];
+
+  const $ = id => document.getElementById(id);
+  const inputs = { company: $('company'), email: $('email'), name: $('name'), title: $('title') };
+  const consent = $('consent');
+  const signBtn = $('signBtn');
+  let unlocked = false;
+
+  function update() {
+    const vh = window.innerHeight;
+    let active = 0;
+    sections.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      if (r.top < vh * 0.85) { seen.add(i); active = i; }
+    });
+    tocItems.forEach((li, i) => {
+      li.classList.toggle('seen', seen.has(i));
+      li.classList.toggle('active', i === active);
+    });
+    const pct = (seen.size / total) * 100 + '%';
+    $('railMeter').style.width = pct;
+    $('barProgress').style.width = pct;
+    $('seenCount').textContent = seen.size;
+    $('lockCount').textContent = `${seen.size} of ${total}`;
+
+    if (!unlocked && seen.size === total) {
+      unlocked = true;
+      Object.values(inputs).forEach(el => { el.disabled = false; });
+      consent.disabled = signBtn.disabled = false;
+      $('lockText').textContent = 'All sections reviewed. You can now sign.';
+    }
+  }
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }
+  }, { passive: true });
+  addEventListener('resize', update);
+  update();
+
+  /* ---------- Signature ---------- */
+  const now = new Date();
+  const fmtDate = d => d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  $('today').textContent = fmtDate(now);
+  $('execDate').textContent = now.toLocaleDateString('en-CA');
+
+  const ink = $('ink');
+  function clearError(key) {
+    inputs[key].removeAttribute('aria-invalid');
+    $(key + 'Error').textContent = '';
+  }
+  Object.keys(inputs).forEach(key => {
+    inputs[key].addEventListener('input', () => { if (inputs[key].value.trim()) clearError(key); });
+  });
+  inputs.name.addEventListener('input', () => {
+    const v = inputs.name.value.trim();
+    ink.textContent = v || 'Your signature';
+    ink.classList.toggle('placeholder', !v);
+  });
+  consent.addEventListener('change', () => { if (consent.checked) $('consentError').textContent = ''; });
+
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  const docText = $('terms').innerText.replace(/\s+/g, ' ').trim();
+  const docHashP = sha256(docText).catch(() => 'unavailable');
+  docHashP.then(h => { $('docHash').textContent = h.slice(0, 16) + '…'; });
+
+  $('form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const val = key => inputs[key].value.trim().replace(/\s+/g, ' ');
+    const checks = {
+      company: [val('company').length >= 2, 'Enter the Client’s legal business name.'],
+      email: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email')), 'Enter a valid email address.'],
+      name: [val('name').split(' ').length >= 2, 'Enter your first and last name.'],
+      title: [val('title').length >= 2, 'Enter your title.']
+    };
+    let ok = true;
+    Object.entries(checks).forEach(([key, [pass, msg]]) => {
+      if (!pass) {
+        inputs[key].setAttribute('aria-invalid', 'true');
+        $(key + 'Error').textContent = msg;
+        ok = false;
+      }
+    });
+    if (!consent.checked) {
+      $('consentError').textContent = 'Check the box to confirm you agree to the terms.';
+      ok = false;
+    }
+    if (!ok) return;
+
+    const name = val('name');
+    const signedAt = new Date();
+    const docHash = await docHashP;
+    const sigId = await sha256(`${val('company')}|${name}|${val('email')}|${signedAt.toISOString()}|${docHash}`).catch(() => 'unavailable');
+
+    $('cName').textContent = name;
+    $('cLegal').textContent = name;
+    $('cTitle').textContent = val('title');
+    $('cCompany').textContent = val('company');
+    $('cEmail').textContent = val('email');
+    $('cTime').textContent =
+      `${fmtDate(signedAt)}, ${signedAt.toLocaleTimeString()} (${signedAt.toISOString()})`;
+    $('cDoc').textContent = docHash;
+    $('cSig').textContent = sigId.slice(0, 32).toUpperCase().match(/.{1,4}/g).join('-');
+
+    rosette($('seal'), 100, 100, [
+      { R: 78, A: 14, k: 18, n: 12, stroke: '#1D4B3A', w: 0.6, o: 0.75 },
+      { R: 56, A: 10, k: 13, n: 10, stroke: '#B8975F', w: 0.5, o: 0.7 },
+      { R: 34, A: 7,  k: 9,  n: 8,  stroke: '#1D4B3A', w: 0.5, o: 0.7 }
+    ]);
+
+    $('signForm').hidden = true;
+    $('certificate').hidden = false;
+    const status = $('status');
+    $('statusText').textContent = 'Executed';
+    status.classList.add('done');
+    $('execution').scrollIntoView({ block: 'start' });
+
+    // optional: log company/name/email/date/signature ID to server or sheet
+  });
+})();
+</script>
+
+</body>
+</html>
